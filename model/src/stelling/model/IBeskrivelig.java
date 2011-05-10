@@ -10,4 +10,11 @@ public interface IBeskrivelig {
 	 * @return Beskrivelse af objektet
 	 */
 	public String beskriv();
+
+	/**
+	 * Returnerer en beskrivelse af objektet
+	 * 
+	 * @return Beskrivelse af objektet
+	 */
+	public String beskriv(String linjePrefix);
 }

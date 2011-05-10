@@ -6,8 +6,12 @@ package stelling.model;
 public class Faerdigindramning extends Indramning {
 
 	@Override
-	public String beskriv() {
-		return "F¾rdigIndramning";
+	public String beskrivOpgaveType() {
+		return "F¾rdigindramning";
 	}
 
+	@Override
+	protected String beskrivDetaljer(String linjePrefix) {
+		return "";
+	}
 }

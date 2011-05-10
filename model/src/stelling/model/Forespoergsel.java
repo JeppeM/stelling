@@ -28,10 +28,16 @@ public class Forespoergsel implements IBeskrivelig {
 
 	@Override
 	public String beskriv() {
+		return beskriv("");
+	}
+
+	@Override
+	public String beskriv(String linjePrefix) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Foresp퓊gsel med f퓄gende opgaver:\n");
+		builder.append(linjePrefix).append(
+				"Foresp퓊gsel med f퓄gende opgaver:\n");
 		for (Opgave opgave : opgaver) {
-			builder.append("\t").append(opgave.beskriv()).append("\n");
+			builder.append(opgave.beskriv(linjePrefix + "\t"));
 		}
 		return builder.toString();
 	}

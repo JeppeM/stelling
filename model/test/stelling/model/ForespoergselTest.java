@@ -21,8 +21,27 @@ public class ForespoergselTest {
 	@Test
 	public void testNyForespoergsel() {
 		Forespoergsel forespoergsel = session.nyForespoergsel();
-		System.out.print(forespoergsel.beskriv());
+		udskrivBeskrivelig(forespoergsel);
 		List<Opgave> opgaver = forespoergsel.opgaver();
 		Assert.assertEquals(1, opgaver.size());
+	}
+
+	@Test
+	public void testForespoergselMedFlereOpgaver() {
+		Forespoergsel forespoergsel = session.nyForespoergsel();
+		udskrivBeskrivelig(forespoergsel);
+		Opgave faerdigindramning = new Faerdigindramning();
+		forespoergsel.tilfoejOpgave(faerdigindramning);
+		udskrivBeskrivelig(forespoergsel);
+	}
+
+	/**
+	 * Hj¾lpemetode til at udskriver et objekt, der kan beskrive sig selv
+	 * 
+	 * @param beskrivelig
+	 */
+	private void udskrivBeskrivelig(IBeskrivelig beskrivelig) {
+		System.out.print(beskrivelig.beskriv());
+		System.out.println();
 	}
 }

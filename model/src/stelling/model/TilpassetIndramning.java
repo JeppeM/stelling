@@ -6,8 +6,12 @@ package stelling.model;
 public class TilpassetIndramning extends Indramning {
 
 	@Override
-	public String beskriv() {
-		return "Tilpasset indramning (" + getBredde() + " x " + getHoejde()
-				+ ")";
+	protected String beskrivOpgaveType() {
+		return "Tilpasset indramning";
+	}
+
+	@Override
+	protected String beskrivDetaljer(String linjePrefix) {
+		return "";
 	}
 }

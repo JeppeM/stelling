@@ -6,8 +6,13 @@ package stelling.model;
 public class Svaeveindramning extends Indramning {
 
 	@Override
-	public String beskriv() {
+	protected String beskrivOpgaveType() {
 		return "Sv¾veindramning";
+	}
+
+	@Override
+	protected String beskrivDetaljer(String linjePrefix) {
+		return "";
 	}
 
 }
