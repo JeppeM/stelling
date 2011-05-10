@@ -7,7 +7,7 @@ public class TilpassetIndramning extends Indramning {
 
 	@Override
 	public String beskriv() {
-		return "Tilpasset indramning";
+		return "Tilpasset indramning (" + getBredde() + " x " + getHoejde()
+				+ ")";
 	}
-
 }
