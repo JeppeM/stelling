@@ -36,7 +36,7 @@ public class ForespoergselTest {
 	}
 
 	/**
-	 * Hj¾lpemetode til at udskriver et objekt, der kan beskrive sig selv
+	 * Hj¾lpemetode til at udskrive et objekt, der kan beskrive sig selv
 	 * 
 	 * @param beskrivelig
 	 */
