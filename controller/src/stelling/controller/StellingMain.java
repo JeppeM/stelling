@@ -1,4 +1,4 @@
-package controller;
+package stelling.controller;
 
 public class StellingMain {
 
