@@ -15,4 +15,8 @@ public class Svaeveindramning extends Indramning {
 		return "";
 	}
 
+	@Override
+	public Beloeb samletPris() {
+		return Beloeb.NUL;
+	}
 }

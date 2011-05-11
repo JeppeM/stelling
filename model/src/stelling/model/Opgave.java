@@ -51,6 +51,8 @@ public abstract class Opgave implements IBeskrivelig {
 		bredde = inBredde;
 	}
 
+	public abstract Beloeb samletPris();
+
 	@Override
 	public final String beskriv() {
 		return beskriv("");
@@ -60,8 +62,10 @@ public abstract class Opgave implements IBeskrivelig {
 	public final String beskriv(String linjePrefix) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(linjePrefix).append(beskrivOpgaveType()).append("\n");
-		builder.append(linjePrefix).append("\tMŒl: ").append(bredde)
+		builder.append(linjePrefix + "\t").append("MŒl: ").append(bredde)
 				.append(" x ").append(hoejde).append("\n");
+		builder.append(linjePrefix + "\t").append("Pris: ")
+				.append(samletPris().toString()).append("\n");
 		builder.append(beskrivDetaljer(linjePrefix + "\t"));
 		return builder.toString();
 	}

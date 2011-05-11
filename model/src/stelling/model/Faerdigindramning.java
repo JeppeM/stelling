@@ -14,4 +14,9 @@ public class Faerdigindramning extends Indramning {
 	protected String beskrivDetaljer(String linjePrefix) {
 		return "";
 	}
+
+	@Override
+	public Beloeb samletPris() {
+		return Beloeb.NUL;
+	}
 }
