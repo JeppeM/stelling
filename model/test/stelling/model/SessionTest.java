@@ -20,5 +20,13 @@ public class SessionTest {
 		Assert.assertEquals(1, session.forespoergsler().size());
 		session.fjernForespoergsel(forespoergsel2);
 		Assert.assertEquals(Collections.emptyList(), session.forespoergsler());
+		try {
+			session.fjernForespoergsel(forespoergsel2);
+			Assert.fail("Session-klassen tillod sletning af den samme"
+					+ " foresp¿rgsel to gange");
+		} catch (IllegalArgumentException e) {
+			// Forventet opf¿rsel - man kan ikke fjerne den samme foresp¿rgsel
+			// flere gange
+		}
 	}
 }
