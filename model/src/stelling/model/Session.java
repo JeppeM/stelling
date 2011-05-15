@@ -42,6 +42,23 @@ public class Session {
 	}
 
 	/**
+	 * Fjerner den specificerede foresp퓊gsel fra sessionen
+	 * 
+	 * @param forespoergsel
+	 *            Foresp퓊gsel der skal fjernes
+	 * @exception IllegalArgumentException
+	 *                Hvis den specificerede foresp퓊gsel ikke findes i
+	 *                sessionen
+	 */
+	public void fjernForespoergsel(Forespoergsel forespoergsel) {
+		if (forespoergsler.remove(forespoergsel)) {
+			return;
+		}
+		throw new IllegalArgumentException(
+				"Sessionen indeholdt ikke den specificerede foresp퓊gsel.");
+	}
+
+	/**
 	 * Privat utility-funktion, der kreerer en default opgave
 	 * 
 	 * @return Ny default opgave
