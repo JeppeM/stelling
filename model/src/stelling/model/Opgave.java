@@ -1,14 +1,21 @@
 package stelling.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Repræsenterer en opgave i en forespørgsel, f.eks. en indramning eller en
  * opspænding
  */
-public abstract class Opgave implements IBeskrivelig {
+public class Opgave implements IBeskrivelig {
+	private final OpgaveType opgaveType;
+	private final Map<IOpgaveAttributType, IOpgaveAttribut> materialer;
 	private LaengdeMaal hoejde;
 	private LaengdeMaal bredde;
 
-	Opgave() {
+	Opgave(OpgaveType inOpgaveType) {
+		opgaveType = inOpgaveType;
+		materialer = new HashMap<IOpgaveAttributType, IOpgaveAttribut>();
 		hoejde = LaengdeMaal.NUL;
 		bredde = LaengdeMaal.NUL;
 	}
@@ -51,7 +58,10 @@ public abstract class Opgave implements IBeskrivelig {
 		bredde = inBredde;
 	}
 
-	public abstract Beloeb samletPris();
+	public Beloeb samletPris() {
+		// TODO: Udregn prisen fra attributterne
+		return Beloeb.NUL;
+	}
 
 	@Override
 	public final String beskriv() {
@@ -61,29 +71,11 @@ public abstract class Opgave implements IBeskrivelig {
 	@Override
 	public final String beskriv(String linjePrefix) {
 		StringBuilder builder = new StringBuilder();
-		builder.append(linjePrefix).append(beskrivOpgaveType()).append("\n");
+		builder.append(linjePrefix).append(opgaveType.navn()).append("\n");
 		builder.append(linjePrefix + "\t").append("Mål: ").append(bredde)
 				.append(" x ").append(hoejde).append("\n");
 		builder.append(linjePrefix + "\t").append("Pris: ")
 				.append(samletPris().toString()).append("\n");
-		builder.append(beskrivDetaljer(linjePrefix + "\t"));
 		return builder.toString();
 	}
-
-	/**
-	 * Beskriver typen af den implementerede opgave
-	 * 
-	 * @return Beskrivelse af opgavetypen
-	 */
-	protected abstract String beskrivOpgaveType();
-
-	/**
-	 * Beskriver detaljer vedrørende den implementerende opgave
-	 * 
-	 * @param linjePrefix
-	 *            Prefix som skal sættes foran på alle linjer, der genereres af
-	 *            den implementerende klasse
-	 * @return Beskrivelse af detaljer vedrørende opgaven
-	 */
-	protected abstract String beskrivDetaljer(String linjePrefix);
 }

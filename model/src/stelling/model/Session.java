@@ -110,22 +110,6 @@ public class Session {
 	 */
 	private static Opgave nyDefaultOpgave() {
 		// TODO: HŒndtering af default-opgave
-		return new Opgave() {
-
-			@Override
-			public Beloeb samletPris() {
-				return Beloeb.NUL;
-			}
-
-			@Override
-			protected String beskrivOpgaveType() {
-				return "<default>";
-			}
-
-			@Override
-			protected String beskrivDetaljer(String linjePrefix) {
-				return "";
-			}
-		};
+		return new OpgaveType("<default>").nyOpgave();
 	}
 }
