@@ -13,9 +13,9 @@ import java.util.List;
  * materialetyper, idet nye kategorier af materialetyper så kan tilføjes
  * dynamisk
  */
-public class MaterialeType {
+abstract class MaterialeType implements IOpgaveAttributType {
 	private final String navn;
-	private final List<Materiale> materialetyper;
+	private final List<Materiale> materialer;
 	private final Materiale nil;
 
 	/**
@@ -24,53 +24,62 @@ public class MaterialeType {
 	 * @param typeNavn
 	 *            Navn på den nye materialetype
 	 */
-	public MaterialeType(String typeNavn) {
+	MaterialeType(String typeNavn) {
 		navn = typeNavn;
-		materialetyper = new ArrayList<Materiale>();
-		nil = new Materiale("Ingen") {
-			@Override
-			public Beloeb pris(LaengdeMaal højde, LaengdeMaal bredde) {
-				return Beloeb.NUL;
-			}
-		};
-		materialetyper.add(nil);
+		materialer = new ArrayList<Materiale>();
+		nil = new Materiale(this, "Ingen", Beloeb.NUL);
+		materialer.add(nil);
 	}
 
 	/**
-	 * Returnerer navnet på denne materialetypekategori
+	 * Returnerer navnet på denne materialetype
 	 * 
-	 * @return Navnet på denne materialetypekategori
+	 * @return Navnet på denne materialetype
 	 */
+	@Override
 	public String navn() {
 		return navn;
 	}
 
 	/**
-	 * Returnerer de tilgængelige materialetyper i denne kategori
+	 * Returnerer de tilgængelige materialer af denne type
 	 * 
-	 * @return Tilgængelige materialetyper
+	 * @return Tilgængelige materialer
 	 */
-	public List<Materiale> materialetyper() {
-		return Collections.unmodifiableList(materialetyper);
+	public List<Materiale> materialer() {
+		return Collections.unmodifiableList(materialer);
 	}
 
 	/**
 	 * Sorterer de specificerede materialetyper efter navn
 	 * 
 	 * @param materialeTyper
-	 *            Kategorier der skal sorteres
-	 * @return Kategorier sorteret efter navn
+	 *            Materialetyper der skal sorteres
+	 * @return Materialetyper sorteret efter navn
 	 */
-	public static final List<MaterialeType> sorterKategorier(
+	public static final List<MaterialeType> sorterMaterialeTyper(
 			Collection<MaterialeType> materialeTyper) {
-		List<MaterialeType> kategoriliste = new ArrayList<MaterialeType>(
-				materialeTyper);
-		Collections.sort(kategoriliste, new Comparator<MaterialeType>() {
+		List<MaterialeType> typer = new ArrayList<MaterialeType>(materialeTyper);
+		Collections.sort(typer, new Comparator<MaterialeType>() {
 			@Override
 			public int compare(MaterialeType o1, MaterialeType o2) {
 				return o1.navn().compareTo(o2.navn());
 			}
 		});
-		return kategoriliste;
+		return typer;
 	}
+
+	/**
+	 * Beregner en pris ud fra de angivne oplysninger
+	 * 
+	 * @param hoejde
+	 *            Opgavens højde
+	 * @param bredde
+	 *            Opgavens bredde
+	 * @param pris
+	 *            Materialets pris
+	 * @return Pris for det angivne materiale i den angivne størrelse
+	 */
+	public abstract Beloeb beregnPris(LaengdeMaal hoejde, LaengdeMaal bredde,
+			Beloeb pris);
 }

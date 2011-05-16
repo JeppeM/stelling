@@ -30,7 +30,7 @@ public class Session {
 	 * @return Materialetyper sorteret efter navn
 	 */
 	public List<MaterialeType> materialeTyper() {
-		return MaterialeType.sorterKategorier(materialeTyper.values());
+		return MaterialeType.sorterMaterialeTyper(materialeTyper.values());
 	}
 
 	/**
