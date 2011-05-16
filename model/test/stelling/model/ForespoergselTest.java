@@ -30,9 +30,6 @@ public class ForespoergselTest {
 	public void testForespoergselMedFlereOpgaver() {
 		Forespoergsel forespoergsel = session.nyForespoergsel();
 		udskrivBeskrivelig(forespoergsel);
-		Opgave faerdigindramning = new Faerdigindramning();
-		forespoergsel.tilfoejOpgave(faerdigindramning);
-		udskrivBeskrivelig(forespoergsel);
 	}
 
 	/**

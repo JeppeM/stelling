@@ -2,7 +2,9 @@ package stelling.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * En session repræsenterer hovedindgangen til modellen. En session løber fra
@@ -11,12 +13,55 @@ import java.util.List;
  */
 public class Session {
 	private final List<Forespoergsel> forespoergsler;
+	private final Map<String, Materialetypekategori> kategorier;
 
 	/**
-	 * Kreerer ny session
+	 * Kreerer en ny session
 	 */
 	public Session() {
 		forespoergsler = new ArrayList<Forespoergsel>();
+		kategorier = new HashMap<String, Materialetypekategori>();
+	}
+
+	/**
+	 * Returnerer de af sessionen understøttede materialetypekategorier sorteret
+	 * efter navn
+	 * 
+	 * @return Materialetypekategorier sorteret efter navn
+	 */
+	public List<Materialetypekategori> materialetypekategorier() {
+		return Materialetypekategori.sorterKategorier(kategorier.values());
+	}
+
+	/**
+	 * Returnerer materialetypekategorien med det specificerede navn
+	 * 
+	 * @param kategorinavn
+	 *            Navn på materialetypekategorien
+	 * @return Materialetypekategorien med det specificerede navn
+	 * @exception IllegalArgumentException
+	 *                Hvis der ikke findes en kategori med det specificerede
+	 *                navn
+	 */
+	public Materialetypekategori materialetypekategori(String kategorinavn) {
+		Materialetypekategori kategori = kategorier.get(kategorinavn);
+		if (kategori == null) {
+			throw new IllegalArgumentException("Kunne ikke finde en"
+					+ " kategori med det specificerede navn: " + kategorinavn);
+		}
+		return kategori;
+	}
+
+	/**
+	 * Tilføjer den specificerede kategori til sessionen. Hvis en kategori med
+	 * samme navn allerede findes i denne session, erstatter den nye kategori
+	 * den gamle med samme navn
+	 * 
+	 * @param kategori
+	 *            Kategori som skal tilføjes til sessionen
+	 */
+	public void tilfoejMaterialetypekategori(Materialetypekategori kategori) {
+		kategorier.put(kategori.navn(), kategori);
 	}
 
 	/**
@@ -64,6 +109,23 @@ public class Session {
 	 * @return Ny default opgave
 	 */
 	private static Opgave nyDefaultOpgave() {
-		return new TilpassetIndramning();
+		// TODO: Håndtering af default-opgave
+		return new Opgave() {
+
+			@Override
+			public Beloeb samletPris() {
+				return Beloeb.NUL;
+			}
+
+			@Override
+			protected String beskrivOpgaveType() {
+				return "<default>";
+			}
+
+			@Override
+			protected String beskrivDetaljer(String linjePrefix) {
+				return "";
+			}
+		};
 	}
 }
