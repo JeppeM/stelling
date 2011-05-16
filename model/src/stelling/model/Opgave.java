@@ -66,7 +66,7 @@ public class Opgave implements IBeskrivelig {
 	public Beloeb samletPris() {
 		Beloeb sum = Beloeb.NUL;
 		for (IOpgaveAttribut att : attributter.values()) {
-			sum = sum.adder(att.pris());
+			sum = sum.adder(att.pris(hoejde, bredde));
 		}
 		return sum;
 	}
