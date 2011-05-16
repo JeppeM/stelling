@@ -19,4 +19,8 @@ public class OpgaveType {
 	public Object navn() {
 		return navn;
 	}
+
+	public void tilfoejAttributType(IOpgaveAttributType attributType) {
+		attributTyper.add(attributType);
+	}
 }

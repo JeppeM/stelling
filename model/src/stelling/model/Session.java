@@ -43,7 +43,7 @@ public class Session {
 	 *                Hvis der ikke findes en materialetype med det
 	 *                specificerede navn
 	 */
-	public MaterialeType materialetypekategori(String materialeTypeNavn) {
+	public MaterialeType materialeType(String materialeTypeNavn) {
 		MaterialeType kategori = materialeTyper.get(materialeTypeNavn);
 		if (kategori == null) {
 			throw new IllegalArgumentException("Kunne ikke finde en"
