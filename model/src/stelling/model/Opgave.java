@@ -9,13 +9,13 @@ import java.util.Map;
  */
 public class Opgave implements IBeskrivelig {
 	private final OpgaveType opgaveType;
-	private final Map<IOpgaveAttributType, IOpgaveAttribut> materialer;
+	private final Map<IOpgaveAttributType, IOpgaveAttribut> attributter;
 	private LaengdeMaal hoejde;
 	private LaengdeMaal bredde;
 
 	Opgave(OpgaveType inOpgaveType) {
 		opgaveType = inOpgaveType;
-		materialer = new HashMap<IOpgaveAttributType, IOpgaveAttribut>();
+		attributter = new HashMap<IOpgaveAttributType, IOpgaveAttribut>();
 		hoejde = LaengdeMaal.NUL;
 		bredde = LaengdeMaal.NUL;
 	}
@@ -58,9 +58,17 @@ public class Opgave implements IBeskrivelig {
 		bredde = inBredde;
 	}
 
+	/**
+	 * Returnerer samlet pris for opgaven
+	 * 
+	 * @return Samlet pris for opgaven
+	 */
 	public Beloeb samletPris() {
-		// TODO: Udregn prisen fra attributterne
-		return Beloeb.NUL;
+		Beloeb sum = Beloeb.NUL;
+		for (IOpgaveAttribut att : attributter.values()) {
+			sum = sum.adder(att.pris());
+		}
+		return sum;
 	}
 
 	@Override
@@ -76,6 +84,11 @@ public class Opgave implements IBeskrivelig {
 				.append(" x ").append(hoejde).append("\n");
 		builder.append(linjePrefix + "\t").append("Pris: ")
 				.append(samletPris().toString()).append("\n");
+		for (IOpgaveAttribut att : attributter.values()) {
+			builder.append(linjePrefix + "\t")
+					.append(att.attributType().navn()).append(": ")
+					.append(att.navn()).append("\n");
+		}
 		return builder.toString();
 	}
 }
