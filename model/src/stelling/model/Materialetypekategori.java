@@ -16,8 +16,8 @@ import java.util.List;
  */
 public class Materialetypekategori {
 	private final String navn;
-	private final List<Materialetype> materialetyper;
-	private final Materialetype nil;
+	private final List<Materiale> materialetyper;
+	private final Materiale nil;
 
 	/**
 	 * Kreerer en Materialetypekategori med det specificerede navn
@@ -27,8 +27,8 @@ public class Materialetypekategori {
 	 */
 	public Materialetypekategori(String kategorinavn) {
 		navn = kategorinavn;
-		materialetyper = new ArrayList<Materialetype>();
-		nil = new Materialetype("Ingen") {
+		materialetyper = new ArrayList<Materiale>();
+		nil = new Materiale("Ingen") {
 			@Override
 			public Beloeb pris(LaengdeMaal h¿jde, LaengdeMaal bredde) {
 				return Beloeb.NUL;
@@ -51,7 +51,7 @@ public class Materialetypekategori {
 	 * 
 	 * @return Tilg¾ngelige materialetyper
 	 */
-	public List<Materialetype> materialetyper() {
+	public List<Materiale> materialetyper() {
 		return Collections.unmodifiableList(materialetyper);
 	}
 
