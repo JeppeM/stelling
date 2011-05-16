@@ -7,26 +7,25 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Repræsenterer en generel kategori af materialetyper, f.eks. 'glastype' eller
- * 'rammetype'
+ * Repræsenterer en generel materialetype, f.eks. 'glastype' eller 'rammetype'
  * <p>
  * Denne klasse træder i stedet for dedikerede klasser til specifikke
  * materialetyper, idet nye kategorier af materialetyper så kan tilføjes
  * dynamisk
  */
-public class Materialetypekategori {
+public class MaterialeType {
 	private final String navn;
 	private final List<Materiale> materialetyper;
 	private final Materiale nil;
 
 	/**
-	 * Kreerer en Materialetypekategori med det specificerede navn
+	 * Kreerer en MaterialeType med det specificerede navn
 	 * 
-	 * @param kategorinavn
-	 *            Navn på den nye materialekategori
+	 * @param typeNavn
+	 *            Navn på den nye materialetype
 	 */
-	public Materialetypekategori(String kategorinavn) {
-		navn = kategorinavn;
+	public MaterialeType(String typeNavn) {
+		navn = typeNavn;
 		materialetyper = new ArrayList<Materiale>();
 		nil = new Materiale("Ingen") {
 			@Override
@@ -56,24 +55,22 @@ public class Materialetypekategori {
 	}
 
 	/**
-	 * Sorterer de specificerede kategorier efter navn
+	 * Sorterer de specificerede materialetyper efter navn
 	 * 
-	 * @param kategorier
+	 * @param materialeTyper
 	 *            Kategorier der skal sorteres
 	 * @return Kategorier sorteret efter navn
 	 */
-	public static final List<Materialetypekategori> sorterKategorier(
-			Collection<Materialetypekategori> kategorier) {
-		List<Materialetypekategori> kategoriliste = new ArrayList<Materialetypekategori>(
-				kategorier);
-		Collections.sort(kategoriliste,
-				new Comparator<Materialetypekategori>() {
-					@Override
-					public int compare(Materialetypekategori o1,
-							Materialetypekategori o2) {
-						return o1.navn().compareTo(o2.navn());
-					}
-				});
+	public static final List<MaterialeType> sorterKategorier(
+			Collection<MaterialeType> materialeTyper) {
+		List<MaterialeType> kategoriliste = new ArrayList<MaterialeType>(
+				materialeTyper);
+		Collections.sort(kategoriliste, new Comparator<MaterialeType>() {
+			@Override
+			public int compare(MaterialeType o1, MaterialeType o2) {
+				return o1.navn().compareTo(o2.navn());
+			}
+		});
 		return kategoriliste;
 	}
 }

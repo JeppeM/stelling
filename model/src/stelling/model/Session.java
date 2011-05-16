@@ -13,55 +13,56 @@ import java.util.Map;
  */
 public class Session {
 	private final List<Forespoergsel> forespoergsler;
-	private final Map<String, Materialetypekategori> kategorier;
+	private final Map<String, MaterialeType> materialeTyper;
 
 	/**
 	 * Kreerer en ny session
 	 */
 	public Session() {
 		forespoergsler = new ArrayList<Forespoergsel>();
-		kategorier = new HashMap<String, Materialetypekategori>();
+		materialeTyper = new HashMap<String, MaterialeType>();
 	}
 
 	/**
-	 * Returnerer de af sessionen understøttede materialetypekategorier sorteret
-	 * efter navn
+	 * Returnerer de af sessionen understøttede materialetyper sorteret efter
+	 * navn
 	 * 
-	 * @return Materialetypekategorier sorteret efter navn
+	 * @return Materialetyper sorteret efter navn
 	 */
-	public List<Materialetypekategori> materialetypekategorier() {
-		return Materialetypekategori.sorterKategorier(kategorier.values());
+	public List<MaterialeType> materialeTyper() {
+		return MaterialeType.sorterKategorier(materialeTyper.values());
 	}
 
 	/**
-	 * Returnerer materialetypekategorien med det specificerede navn
+	 * Returnerer materialetypen med det specificerede navn
 	 * 
-	 * @param kategorinavn
-	 *            Navn på materialetypekategorien
-	 * @return Materialetypekategorien med det specificerede navn
+	 * @param materialeTypeNavn
+	 *            Navn på materialetypen
+	 * @return Materialetypen med det specificerede navn
 	 * @exception IllegalArgumentException
-	 *                Hvis der ikke findes en kategori med det specificerede
-	 *                navn
+	 *                Hvis der ikke findes en materialetype med det
+	 *                specificerede navn
 	 */
-	public Materialetypekategori materialetypekategori(String kategorinavn) {
-		Materialetypekategori kategori = kategorier.get(kategorinavn);
+	public MaterialeType materialetypekategori(String materialeTypeNavn) {
+		MaterialeType kategori = materialeTyper.get(materialeTypeNavn);
 		if (kategori == null) {
 			throw new IllegalArgumentException("Kunne ikke finde en"
-					+ " kategori med det specificerede navn: " + kategorinavn);
+					+ " materialetype med det specificerede navn: "
+					+ materialeTypeNavn);
 		}
 		return kategori;
 	}
 
 	/**
-	 * Tilføjer den specificerede kategori til sessionen. Hvis en kategori med
-	 * samme navn allerede findes i denne session, erstatter den nye kategori
-	 * den gamle med samme navn
+	 * Tilføjer den specificerede materialetype til sessionen. Hvis en
+	 * materialetype med samme navn allerede findes i denne session, erstatter
+	 * den nye type den gamle med samme navn
 	 * 
-	 * @param kategori
-	 *            Kategori som skal tilføjes til sessionen
+	 * @param materialeType
+	 *            Materialetype som skal tilføjes til sessionen
 	 */
-	public void tilfoejMaterialetypekategori(Materialetypekategori kategori) {
-		kategorier.put(kategori.navn(), kategori);
+	public void tilfoejMaterialetypekategori(MaterialeType materialeType) {
+		materialeTyper.put(materialeType.navn(), materialeType);
 	}
 
 	/**
