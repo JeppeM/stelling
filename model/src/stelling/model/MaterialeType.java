@@ -1,9 +1,7 @@
 package stelling.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -17,6 +15,7 @@ abstract class MaterialeType implements IOpgaveAttributType {
 	private final String navn;
 	private final List<Materiale> materialer;
 	private final Materiale nil;
+	private Materiale defaultVaerdi;
 
 	/**
 	 * Kreerer en MaterialeType med det specificerede navn
@@ -28,6 +27,7 @@ abstract class MaterialeType implements IOpgaveAttributType {
 		navn = typeNavn;
 		materialer = new ArrayList<Materiale>();
 		nil = new Materiale(this, "Ingen", Beloeb.NUL);
+		defaultVaerdi = nil;
 		materialer.add(nil);
 	}
 
@@ -48,6 +48,25 @@ abstract class MaterialeType implements IOpgaveAttributType {
 	 */
 	public List<Materiale> materialer() {
 		return Collections.unmodifiableList(materialer);
+	}
+
+	@Override
+	public IOpgaveAttribut defaultVaerdi() {
+		return defaultVaerdi;
+	}
+
+	/**
+	 * ®ndrer denne materialetypes defaultv¾rdi
+	 * 
+	 * @param defaultVaerdi
+	 *            Ny defaultv¾rdi
+	 */
+	public void setDefaultVaerdi(Materiale inDefaultVaerdi) {
+		if (inDefaultVaerdi.attributType() != this) {
+			throw new IllegalArgumentException(
+					"Den specificerede default v¾rdi var af en forkert type.");
+		}
+		this.defaultVaerdi = defaultVaerdi;
 	}
 
 	/**

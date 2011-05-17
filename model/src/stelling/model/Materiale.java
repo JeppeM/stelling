@@ -42,7 +42,6 @@ public class Materiale implements IOpgaveAttribut {
 
 	@Override
 	public IOpgaveAttributType attributType() {
-		// TODO Auto-generated method stub
-		return null;
+		return type;
 	}
 }
