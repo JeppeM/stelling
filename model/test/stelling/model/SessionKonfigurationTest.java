@@ -1,5 +1,8 @@
 package stelling.model;
 
+import java.util.Collection;
+import java.util.Collections;
+
 import org.junit.Test;
 
 /**
@@ -20,6 +23,16 @@ public class SessionKonfigurationTest {
 
 	private static final class MockKonfiguration implements
 			ISessionKonfiguration {
+
+		@Override
+		public Collection<OpgaveType> opgaveTyper() {
+			return Collections.emptyList();
+		}
+
+		@Override
+		public OpgaveType defaultOpgaveType() {
+			return OpgaveType.BLANK;
+		}
 
 	}
 }

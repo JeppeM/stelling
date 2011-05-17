@@ -2,9 +2,7 @@ package stelling.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * En session repræsenterer hovedindgangen til modellen. En session løber fra
@@ -13,7 +11,7 @@ import java.util.Map;
  */
 public class Session {
 	private final List<Forespoergsel> forespoergsler;
-	private final Map<String, OpgaveType> opgaveTyper;
+	private final List<OpgaveType> opgaveTyper;
 	private OpgaveType defaultOpgaveType;
 
 	/**
@@ -21,7 +19,7 @@ public class Session {
 	 */
 	public Session() {
 		forespoergsler = new ArrayList<Forespoergsel>();
-		opgaveTyper = new HashMap<String, OpgaveType>();
+		opgaveTyper = new ArrayList<OpgaveType>();
 		defaultOpgaveType = OpgaveType.BLANK;
 	}
 
@@ -31,27 +29,7 @@ public class Session {
 	 * @return Opgavetyper sorteret efter navn
 	 */
 	public List<OpgaveType> opgaveTyper() {
-		return OpgaveType.sorterOpgaveTyper(opgaveTyper.values());
-	}
-
-	/**
-	 * Returnerer opgavetypen med det specificerede navn
-	 * 
-	 * @param opgaveTypeNavn
-	 *            Navn på opgavetypen
-	 * @return Opgavetypen med det specificerede navn
-	 * @exception IllegalArgumentException
-	 *                Hvis der ikke findes en opgavetype med det specificerede
-	 *                navn
-	 */
-	public OpgaveType opgaveType(String opgaveTypeNavn) {
-		OpgaveType type = opgaveTyper.get(opgaveTypeNavn);
-		if (type == null) {
-			throw new IllegalArgumentException("Kunne ikke finde en"
-					+ " opgavetype med det specificerede navn: "
-					+ opgaveTypeNavn);
-		}
-		return type;
+		return Collections.unmodifiableList(opgaveTyper);
 	}
 
 	/**
@@ -93,7 +71,9 @@ public class Session {
 	}
 
 	public void konfigurer(ISessionKonfiguration konfiguration) {
-		// TODO Auto-generated method stub
-
+		opgaveTyper.clear();
+		opgaveTyper.addAll(OpgaveType.sorterOpgaveTyper(konfiguration
+				.opgaveTyper()));
+		defaultOpgaveType = konfiguration.defaultOpgaveType();
 	}
 }
