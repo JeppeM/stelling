@@ -113,4 +113,9 @@ public class Session {
 		// TODO: HŒndtering af default-opgave
 		return new OpgaveType("<default>").nyOpgave();
 	}
+
+	public void konfigurer(ISessionKonfiguration konfiguration) {
+		// TODO Auto-generated method stub
+
+	}
 }
