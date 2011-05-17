@@ -51,25 +51,6 @@ abstract class MaterialeType implements IOpgaveAttributType {
 	}
 
 	/**
-	 * Sorterer de specificerede materialetyper efter navn
-	 * 
-	 * @param materialeTyper
-	 *            Materialetyper der skal sorteres
-	 * @return Materialetyper sorteret efter navn
-	 */
-	public static final List<MaterialeType> sorterMaterialeTyper(
-			Collection<MaterialeType> materialeTyper) {
-		List<MaterialeType> typer = new ArrayList<MaterialeType>(materialeTyper);
-		Collections.sort(typer, new Comparator<MaterialeType>() {
-			@Override
-			public int compare(MaterialeType o1, MaterialeType o2) {
-				return o1.navn().compareTo(o2.navn());
-			}
-		});
-		return typer;
-	}
-
-	/**
 	 * Beregner en pris ud fra de angivne oplysninger
 	 * 
 	 * @param hoejde

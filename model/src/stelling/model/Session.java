@@ -13,56 +13,43 @@ import java.util.Map;
  */
 public class Session {
 	private final List<Forespoergsel> forespoergsler;
-	private final Map<String, MaterialeType> materialeTyper;
+	private final Map<String, OpgaveType> opgaveTyper;
 
 	/**
 	 * Kreerer en ny session
 	 */
 	public Session() {
 		forespoergsler = new ArrayList<Forespoergsel>();
-		materialeTyper = new HashMap<String, MaterialeType>();
+		opgaveTyper = new HashMap<String, OpgaveType>();
 	}
 
 	/**
-	 * Returnerer de af sessionen understøttede materialetyper sorteret efter
-	 * navn
+	 * Returnerer de af sessionen understøttede opgavetyper sorteret efter navn
 	 * 
-	 * @return Materialetyper sorteret efter navn
+	 * @return Opgavetyper sorteret efter navn
 	 */
-	public List<MaterialeType> materialeTyper() {
-		return MaterialeType.sorterMaterialeTyper(materialeTyper.values());
+	public List<OpgaveType> opgaveTyper() {
+		return OpgaveType.sorterOpgaveTyper(opgaveTyper.values());
 	}
 
 	/**
-	 * Returnerer materialetypen med det specificerede navn
+	 * Returnerer opgavetypen med det specificerede navn
 	 * 
-	 * @param materialeTypeNavn
-	 *            Navn på materialetypen
-	 * @return Materialetypen med det specificerede navn
+	 * @param opgaveTypeNavn
+	 *            Navn på opgavetypen
+	 * @return Opgavetypen med det specificerede navn
 	 * @exception IllegalArgumentException
-	 *                Hvis der ikke findes en materialetype med det
-	 *                specificerede navn
+	 *                Hvis der ikke findes en opgavetype med det specificerede
+	 *                navn
 	 */
-	public MaterialeType materialeType(String materialeTypeNavn) {
-		MaterialeType kategori = materialeTyper.get(materialeTypeNavn);
-		if (kategori == null) {
+	public OpgaveType opgaveType(String opgaveTypeNavn) {
+		OpgaveType type = opgaveTyper.get(opgaveTypeNavn);
+		if (type == null) {
 			throw new IllegalArgumentException("Kunne ikke finde en"
-					+ " materialetype med det specificerede navn: "
-					+ materialeTypeNavn);
+					+ " opgavetype med det specificerede navn: "
+					+ opgaveTypeNavn);
 		}
-		return kategori;
-	}
-
-	/**
-	 * Tilføjer den specificerede materialetype til sessionen. Hvis en
-	 * materialetype med samme navn allerede findes i denne session, erstatter
-	 * den nye type den gamle med samme navn
-	 * 
-	 * @param materialeType
-	 *            Materialetype som skal tilføjes til sessionen
-	 */
-	public void tilfoejMaterialetypekategori(MaterialeType materialeType) {
-		materialeTyper.put(materialeType.navn(), materialeType);
+		return type;
 	}
 
 	/**
