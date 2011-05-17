@@ -10,6 +10,8 @@ public class OpgaveType {
 	private final String navn;
 	private final List<IOpgaveAttributType> attributTyper;
 
+	public static final OpgaveType BLANK = new OpgaveType("<BLANK>");
+
 	public OpgaveType(String inNavn) {
 		navn = inNavn;
 		attributTyper = new ArrayList<IOpgaveAttributType>();

@@ -14,6 +14,7 @@ import java.util.Map;
 public class Session {
 	private final List<Forespoergsel> forespoergsler;
 	private final Map<String, OpgaveType> opgaveTyper;
+	private OpgaveType defaultOpgaveType;
 
 	/**
 	 * Kreerer en ny session
@@ -21,6 +22,7 @@ public class Session {
 	public Session() {
 		forespoergsler = new ArrayList<Forespoergsel>();
 		opgaveTyper = new HashMap<String, OpgaveType>();
+		defaultOpgaveType = OpgaveType.BLANK;
 	}
 
 	/**
@@ -68,8 +70,7 @@ public class Session {
 	 */
 	public Forespoergsel nyForespoergsel() {
 		Forespoergsel forespoergsel = new Forespoergsel();
-		Opgave defaultOpgave = nyDefaultOpgave();
-		forespoergsel.tilfoejOpgave(defaultOpgave);
+		forespoergsel.tilfoejOpgave(defaultOpgaveType.nyOpgave());
 		forespoergsler.add(forespoergsel);
 		return forespoergsel;
 	}
@@ -89,16 +90,6 @@ public class Session {
 		}
 		throw new IllegalArgumentException(
 				"Sessionen indeholdt ikke den specificerede foresp¿rgsel.");
-	}
-
-	/**
-	 * Privat utility-funktion, der kreerer en default opgave
-	 * 
-	 * @return Ny default opgave
-	 */
-	private static Opgave nyDefaultOpgave() {
-		// TODO: HŒndtering af default-opgave
-		return new OpgaveType("<default>").nyOpgave();
 	}
 
 	public void konfigurer(ISessionKonfiguration konfiguration) {
