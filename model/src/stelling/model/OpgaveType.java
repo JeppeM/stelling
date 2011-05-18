@@ -4,17 +4,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OpgaveType {
 	private final String navn;
 	private final List<IOpgaveAttributType> attributTyper;
 
-	public static final OpgaveType BLANK = new OpgaveType("<BLANK>");
+	public static final OpgaveType BLANK = new OpgaveType("<BLANK>",
+			new ArrayList<IOpgaveAttributType>());
 
-	public OpgaveType(String inNavn) {
+	public OpgaveType(String inNavn, List<IOpgaveAttributType> inAttributTyper) {
 		navn = inNavn;
-		attributTyper = new ArrayList<IOpgaveAttributType>();
+		attributTyper = new ArrayList<IOpgaveAttributType>(inAttributTyper);
 	}
 
 	public Opgave nyOpgave() {
@@ -23,10 +26,6 @@ public class OpgaveType {
 
 	public String navn() {
 		return navn;
-	}
-
-	public void tilfoejAttributType(IOpgaveAttributType attributType) {
-		attributTyper.add(attributType);
 	}
 
 	/**
@@ -46,5 +45,19 @@ public class OpgaveType {
 			}
 		});
 		return typer;
+	}
+
+	/**
+	 * Returnerer et map med denne opgavetypes attributtyper og deres respektive
+	 * defaultv¾rdier
+	 * 
+	 * @return Map over attributtypernes defaultv¾rdier
+	 */
+	public Map<IOpgaveAttributType, IOpgaveAttribut> defaultAttributter() {
+		Map<IOpgaveAttributType, IOpgaveAttribut> map = new HashMap<IOpgaveAttributType, IOpgaveAttribut>();
+		for (IOpgaveAttributType attributType : attributTyper) {
+			map.put(attributType, attributType.defaultVaerdi());
+		}
+		return map;
 	}
 }

@@ -4,4 +4,6 @@ public interface IOpgaveAttributType {
 
 	Object navn();
 
+	IOpgaveAttribut defaultVaerdi();
+
 }

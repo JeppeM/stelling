@@ -15,7 +15,7 @@ public class Opgave implements IBeskrivelig {
 
 	Opgave(OpgaveType inOpgaveType) {
 		opgaveType = inOpgaveType;
-		attributter = new HashMap<IOpgaveAttributType, IOpgaveAttribut>();
+		attributter = opgaveType.defaultAttributter();
 		hoejde = LaengdeMaal.NUL;
 		bredde = LaengdeMaal.NUL;
 	}
